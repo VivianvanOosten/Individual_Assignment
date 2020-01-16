@@ -12,12 +12,27 @@ library(tidyverse)
 ```{r}
 conflicts_india_2001 <- read_csv('relevant_data.csv')
 ```
+
 ```{r}
 
 total_deaths_india_2001 <- conflicts_india_2001 %>%
-  summarize(total_deaths_best = sum(best),
-            total_deaths_low = sum(low),
-            total_deaths_high = sum(high))
+  summarize(Best = sum(best),
+            Low = sum(low),
+            High = sum(high)) %>%
+  mutate(
+    High = High/1000,
+    Low = Low/1000,
+    Best = Best/1000
+  )
 
+plot_deaths_india_2001 <- t(total_deaths_india_2001) %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "Fatalities")
+```
+
+```{r}
+ggplot(plot_deaths_india_2001) +
+  geom_col(mapping = aes(x = Fatalities, y = V1), fill='red') +
+  ylab("Fatalities in thousands") + xlab('Estimation')
 ```
 
