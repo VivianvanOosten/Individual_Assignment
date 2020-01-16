@@ -5,7 +5,7 @@ import json
 with open('conflict_data/conflict_data_full_lined.json') as file:
     conflict_data = json.load(file)
 
-india_2001 = []
+india_2001 = [["id", "best", "high", "low"]]
 
 for incident in conflict_data:
     if incident["country"] == "India":
