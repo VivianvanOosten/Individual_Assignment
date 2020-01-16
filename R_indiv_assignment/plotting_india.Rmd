@@ -24,13 +24,14 @@ total_deaths_india <- conflicts_india %>%
     High = High/1000,
     Low = Low/1000,
     Best = Best/1000
-  )
+  ) %>%
+  gather(Estimate, Fatalities, Best:High)
 ```
 
 Making a plot of the incidents over the years.
 ```{r}
 ggplot(total_deaths_india) +
-  geom_line(mapping = aes(x = year, y = Best)) +
-  ylab("Fatalities (x1000)") + xlab('Estimation')
+  geom_line(mapping = aes(x = year, y = Fatalities, color = Estimate)) +
+  ylab("Fatalities (x1000)") + xlab('Year')
 ```
 
