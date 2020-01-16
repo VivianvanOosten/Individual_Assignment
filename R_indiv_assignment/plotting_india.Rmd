@@ -31,7 +31,23 @@ Making a plot of the incidents over the years.
 ```{r}
 ggplot(total_deaths_india, aes(x = year, y = Best)) +
   geom_point() +
-  geom_smooth(method='lm') +
+  geom_smooth(method='lm') + 
   ylab("Fatalities (x1000)") + xlab('Year')
 ```
+some statistics caluclations
+```{r}
+linearMod <- lm(Best ~ year, data=total_deaths_india)
+modelSummary <- summary(linearMod)
+print(modelSummary)
+modelCoeffs <- modelSummary$coefficients
+beta.estimate <- modelCoeffs["year", "Estimate"]
+std.error <- modelCoeffs["year", "Std. Error"]
+t_value <- beta.estimate/std.error
+p_value <- 2*pt(-abs(t_value),df=nrow(total_deaths_india)-ncol(total_deaths_india))
+f_statistic <- modelSummary$fstatistic[1]
+print(t_value)
+print(p_value)
+print(f_statistic)
+```
+
 
