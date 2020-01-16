@@ -10,12 +10,13 @@ library(tidyverse)
 
 
 ```{r}
-conflicts_india_2001 <- read_csv('relevant_data.csv')
+conflicts_india <- read_csv('relevant_data_years.csv')
 ```
 
 ```{r}
 
-total_deaths_india_2001 <- conflicts_india_2001 %>%
+total_deaths_india <- conflicts_india %>%
+  group_by(year) %>%
   summarize(Best = sum(best),
             Low = sum(low),
             High = sum(high)) %>%
@@ -24,15 +25,15 @@ total_deaths_india_2001 <- conflicts_india_2001 %>%
     Low = Low/1000,
     Best = Best/1000
   )
-
-plot_deaths_india_2001 <- t(total_deaths_india_2001) %>%
-  as.data.frame() %>%
-  rownames_to_column(var = "Fatalities")
 ```
 
+plot_deaths_india <- t(total_deaths_india) %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "Fatalities")
+
 ```{r}
-ggplot(plot_deaths_india_2001) +
-  geom_col(mapping = aes(x = Fatalities, y = V1), fill='red') +
-  ylab("Fatalities in thousands") + xlab('Estimation')
+ggplot(total_deaths_india) +
+  geom_line(mapping = aes(x = year, y = Best), fill='red') +
+  ylab("Fatalities (x1000)") + xlab('Estimation')
 ```
 
