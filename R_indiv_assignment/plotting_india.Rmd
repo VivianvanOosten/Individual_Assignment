@@ -1,0 +1,23 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+conflicts_india_2001 <- read_csv('relevant_data.csv')
+```
+```{r}
+
+total_deaths_india_2001 <- conflicts_india_2001 %>%
+  summarize(total_deaths_best = sum(best),
+            total_deaths_low = sum(low),
+            total_deaths_high = sum(high))
+
+```
+
