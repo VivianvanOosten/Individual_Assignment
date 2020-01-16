@@ -3,16 +3,16 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-
 ```{r}
 library(tidyverse)
 ```
 
-
+Loading the data.
 ```{r}
-conflicts_india <- read_csv('relevant_data_years.csv')
+conflicts_india <- read_csv('relevant_data_years_type.csv')
 ```
 
+Summing the number of deaths per incident. 
 ```{r}
 
 total_deaths_india <- conflicts_india %>%
@@ -27,13 +27,10 @@ total_deaths_india <- conflicts_india %>%
   )
 ```
 
-plot_deaths_india <- t(total_deaths_india) %>%
-  as.data.frame() %>%
-  rownames_to_column(var = "Fatalities")
-
+Making a plot of the incidents over the years.
 ```{r}
 ggplot(total_deaths_india) +
-  geom_line(mapping = aes(x = year, y = Best), fill='red') +
+  geom_line(mapping = aes(x = year, y = Best)) +
   ylab("Fatalities (x1000)") + xlab('Estimation')
 ```
 
