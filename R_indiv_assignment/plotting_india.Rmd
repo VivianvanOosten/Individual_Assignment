@@ -24,15 +24,17 @@ total_deaths_india <- conflicts_india %>%
     High = High/1000,
     Low = Low/1000,
     Best = Best/1000
-  )
+  ) %>%
+  gather(Estimate, Fatalities, Best:High)
 ```
-gather(Estimate, Fatalities, Best:High)
 Making a plot of the incidents over the years.
 ```{r}
-ggplot(total_deaths_india, aes(x = year, y = Best)) +
+ggplot(total_deaths_india, aes(x = year, y = Fatalities)) +
   geom_point() +
   geom_smooth(method='lm') + 
-  ylab("Fatalities (x1000)") + xlab('Year')
+  ylab("Fatalities (x1000)") + xlab('Year') +
+  facet_grid(. ~ Estimate)
+ggsave('Threeplotsave.pdf')
 ```
 some statistics caluclations
 ```{r}
