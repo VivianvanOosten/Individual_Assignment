@@ -32,9 +32,10 @@ Making a plot of the incidents over the years.
 ggplot(total_deaths_india, aes(x = year, y = Fatalities)) +
   geom_point() +
   geom_smooth(method='lm') + 
-  ylab("Fatalities (x1000)") + xlab('Year') +
+  ylab("Fatalities (x1000)") + xlab('Year') + 
+  ggtitle("Fatalities in India between 1989 and 2015 - all estimates") +
   facet_grid(. ~ Estimate)
-ggsave('Threeplotsave.pdf')
+ggsave('oneplot.pdf')
 ```
 some statistics caluclations
 ```{r}
