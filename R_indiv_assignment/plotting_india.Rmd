@@ -35,7 +35,7 @@ ggplot(total_deaths_india, aes(x = year, y = Fatalities)) +
   ylab("Fatalities (x1000)") + xlab('Year') + 
   ggtitle("Fatalities in India between 1989 and 2015 - all estimates") +
   facet_grid(. ~ Estimate)
-ggsave('oneplot.pdf')
+ggsave('Threeplotsave.pdf')
 ```
 some statistics caluclations
 ```{r}
